@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Account maker</title>
+        <style>
+            @keyframes appear{
+                from{opacity:0;margin-top:-50px;}
+                to{opacity:1;margin-top:0px;}
+            }
+            nav{
+                background:#1098ff;
+                margin:-8px;
+                margin-top:-0.5em;
+                user-select:none;
+            }
+            .h1{
+                font-weight:bold;
+                font-size:210%;
+            }
+            .left{
+                float:right;
+                color:#000079;
+                cursor:pointer;
+            }
+            .senin{
+                background:#1098ff;
+                margin-left:auto;
+                padding:18px;
+                display:none;
+                animation-name:appear;
+                animation-duration:0.6s;
+                animation-iteration-count:1;
+            }
+            .senin h2{
+                background:#0000c5;
+                user-select:none;
+            }
+            .senin input{
+                border:2px solid black;
+                padding:5px;
+            }
+            .senin input:focus{
+                border:2px solid #090;
+            }
+            .senin input:hover{
+                border:2px solid #00df00;
+            }
+            .senin p{
+                margin-bottom:-7px;
+                user-select:none;
+            }
+            .senin button{
+                border:none;
+                background:#0000ff;
+                padding:13px;
+                font-size:20px;
+                cursor:pointer;
+                transition:0.5s;
+            }
+            .senin button:hover{
+                transition:0.5s;
+                background:#10e1ff;
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <span class = "h1" title = "Account maker">Account maker</span>
+            <span id = "l" class = "left" title = "You've already signed in">Signed in</span>
+            <span id = "s" class="left" onclick = "signin();" title = "Sign up——It's free">Sign up</span>
+        </nav>  <br>
+        <div class = "senin" id = "sign">
+            <h2>Sign up</h2>
+            <p title = "Custom username">Username: <input type = "text" id = "a"></p>
+            <p title = "Custom password">Password: &nbsp;<input type = "password" id = "b"></p><br>
+            <button title = "Sign up" onclick = "ade();">Sign up</button>
+        </div>
+        <script>
+            if(typeof(Storage) == "undefined") {
+                document.body.innerHTML = "<h1 style = 'background:#f00;'>404 error</h1> <p style = 'color:#f00;'>You do not support local storage, which is needed in order for this webpage to make its accounts</p>";
+            }
+            if(localStorage.getItem("username") === null && localStorage.getItem("password") === null){
+                document.getElementById("l").style.display = "none";
+                document.getElementById("s").style.display = "block";
+            }else{
+                document.getElementById("l").style.display = "block";
+                document.getElementById("l").title = "your username is:"+localStorage.getItem("username")+" your password is:"+localStorage.getItem("password");
+                document.getElementById("s").style.display = "none";
+            }
+            function signin(){
+                document.getElementById("sign").style.display = "block";
+            }
+            var a = document.getElementById("a").value;
+            var b = document.getElementById("b").value;
+            function ade(){
+                localstorage.setItem("username",a);
+                localstorage.setItem("password",b);
+                alert("Signed in successfully!");
+            }
+        </script>
+    </body>
+</html>
